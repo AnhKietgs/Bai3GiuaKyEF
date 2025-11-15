@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QuanLyHangHoaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DMChatLieu">
+          <Key>
+            <PropertyRef Name="MaCLieu" />
+          </Key>
+          <Property Name="MaCLieu" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="TenCLieu" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="DMHang">
+          <Key>
+            <PropertyRef Name="MaHang" />
+          </Key>
+          <Property Name="MaHang" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="TenHang" Type="nvarchar" MaxLength="20" />
+          <Property Name="SoLuong" Type="int" />
+          <Property Name="DonGiaNhap" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="DonGiaBan" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Hinh" Type="nvarchar" MaxLength="100" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="100" />
+          <Property Name="MaCLieu" Type="char" MaxLength="6" />
+        </EntityType>
+        <Association Name="FK__DMHang__MaCLieu__3C69FB99">
+          <End Role="DMChatLieu" Type="Self.DMChatLieu" Multiplicity="0..1" />
+          <End Role="DMHang" Type="Self.DMHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DMChatLieu">
+              <PropertyRef Name="MaCLieu" />
+            </Principal>
+            <Dependent Role="DMHang">
+              <PropertyRef Name="MaCLieu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuanLyHangHoaModelStoreContainer">
+          <EntitySet Name="DMChatLieu" EntityType="Self.DMChatLieu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DMHang" EntityType="Self.DMHang" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__DMHang__MaCLieu__3C69FB99" Association="Self.FK__DMHang__MaCLieu__3C69FB99">
+            <End Role="DMChatLieu" EntitySet="DMChatLieu" />
+            <End Role="DMHang" EntitySet="DMHang" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QuanLyHangHoaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DMChatLieu">
+          <Key>
+            <PropertyRef Name="MaCLieu" />
+          </Key>
+          <Property Name="MaCLieu" Type="String" MaxLength="6" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TenCLieu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DMHangs" Relationship="Self.FK__DMHang__MaCLieu__3C69FB99" FromRole="DMChatLieu" ToRole="DMHang" />
+        </EntityType>
+        <EntityType Name="DMHang">
+          <Key>
+            <PropertyRef Name="MaHang" />
+          </Key>
+          <Property Name="MaHang" Type="String" MaxLength="6" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TenHang" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SoLuong" Type="Int32" />
+          <Property Name="DonGiaNhap" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="DonGiaBan" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Hinh" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GhiChu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MaCLieu" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="DMChatLieu" Relationship="Self.FK__DMHang__MaCLieu__3C69FB99" FromRole="DMHang" ToRole="DMChatLieu" />
+        </EntityType>
+        <Association Name="FK__DMHang__MaCLieu__3C69FB99">
+          <End Role="DMChatLieu" Type="Self.DMChatLieu" Multiplicity="0..1" />
+          <End Role="DMHang" Type="Self.DMHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DMChatLieu">
+              <PropertyRef Name="MaCLieu" />
+            </Principal>
+            <Dependent Role="DMHang">
+              <PropertyRef Name="MaCLieu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuanLyHangHoaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DMChatLieux" EntityType="Self.DMChatLieu" />
+          <EntitySet Name="DMHangs" EntityType="Self.DMHang" />
+          <AssociationSet Name="FK__DMHang__MaCLieu__3C69FB99" Association="Self.FK__DMHang__MaCLieu__3C69FB99">
+            <End Role="DMChatLieu" EntitySet="DMChatLieux" />
+            <End Role="DMHang" EntitySet="DMHangs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QuanLyHangHoaModelStoreContainer" CdmEntityContainer="QuanLyHangHoaEntities">
+          <EntitySetMapping Name="DMChatLieux">
+            <EntityTypeMapping TypeName="QuanLyHangHoaModel.DMChatLieu">
+              <MappingFragment StoreEntitySet="DMChatLieu">
+                <ScalarProperty Name="MaCLieu" ColumnName="MaCLieu" />
+                <ScalarProperty Name="TenCLieu" ColumnName="TenCLieu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DMHangs">
+            <EntityTypeMapping TypeName="QuanLyHangHoaModel.DMHang">
+              <MappingFragment StoreEntitySet="DMHang">
+                <ScalarProperty Name="MaHang" ColumnName="MaHang" />
+                <ScalarProperty Name="TenHang" ColumnName="TenHang" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="DonGiaNhap" ColumnName="DonGiaNhap" />
+                <ScalarProperty Name="DonGiaBan" ColumnName="DonGiaBan" />
+                <ScalarProperty Name="Hinh" ColumnName="Hinh" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="MaCLieu" ColumnName="MaCLieu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
